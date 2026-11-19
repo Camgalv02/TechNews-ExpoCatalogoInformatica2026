@@ -1,0 +1,44 @@
+CORRECCIONES Y CAMBIOS - Expo Técnica Informática 2026 (TechNews)
+================================================================
+
+COMO SE USA
+- Editar los archivos de datos/ (noticias.json, proyectos.json, tecnologias.json) y ejecutar:
+      python generar.py
+  Eso vuelve a crear html/index.html. No hace falta tocar el HTML a mano.
+- Las fotos van en img/. Si una foto falta, la tarjeta no se rompe: queda un fondo de color con un ícono.
+
+LO QUE SE CONSERVO DEL TRABAJO ORIGINAL
+- datos/noticias.json: sin cambios (mismos campos: titulo, fecha, imagen, texto).
+- generar.py: se mantiene la lógica de leer el JSON, ordenar por fecha (de la más reciente a la más antigua),
+  dar formato dd/mm/aaaa y escapar los textos. Ahora arma la página completa en lugar de insertarla entre marcadores.
+- plantillas/noticias.html: mismo nombre y mismos campos ({{imagen}}, {{fecha}}, {{titulo}}, {{texto}}).
+- Todos los textos: carrera, habilidades, características, salida laboral, OFIRCA, juegos, pie de página.
+- Todos los enlaces: ubicación, Facebook, Instagram y los juegos en Netlify.
+- Todas las imágenes de img/ (banner, íconos de tecnologías, capturas, equipos, redes).
+- Las ideas de las alumnas: botón "volver arriba" y cursor mágico con brillitos.
+
+CAMBIOS DE DISEÑO
+- Estética oscura tipo neón, con degradados, tarjetas de vidrio y animaciones.
+- Nuevo orden: Inicio > Carrera > Tecnologías > Noticias > Juegos > Contacto.
+- Las tecnologías pasan a una cinta que se desplaza sola (usa los mismos íconos de img/).
+- Se quitó el modo claro (la página es oscura por diseño) y la aparición de secciones al hacer scroll.
+  Si se prefieren, se pueden volver a agregar.
+
+ERRORES CORREGIDOS
+- Tarjeta "Próximo Proyecto" con imagen rota y textos "(Completar)": eliminada.
+- "Autores (4.° año):Fernandez B." sin espacio y con el símbolo mal escrito: corregido.
+- "Descripción:" repetido en cada tarjeta: eliminado.
+- Voseo unificado: "Haz click" -> "Hacé clic"; "Moverse con las teclas" -> "Movete con las teclas".
+- Íconos de contacto gigantes y sin texto: ahora son botones con etiqueta.
+- <section id="carrera"> y <section id="tecnologias"> estaban duplicadas (una dentro de otra): corregido.
+- Se cerraba <body> antes de los botones y scripts: corregido.
+
+PENDIENTE
+1. Autores: en "Golpea al Conejo Blanco" figura "Estudiantes de 4to año de Informática". Completar con los nombres reales
+   en datos/proyectos.json (campo "autores"), y "tutores" si corresponde.
+2. Carreras Locas: completar el nombre y apellido de "Fernandez B.".
+3. banner.png tiene el título escrito dentro de la foto. Con una foto de la escuela sin texto se ve mejor.
+4. Las imágenes "juego 1.PNG" y "juego 2.png" tienen espacios y mayúsculas en el nombre. Funcionan, pero conviene
+   renombrarlas (juego-1.png, juego-2.png) y actualizar el campo "imagen" en proyectos.json.
+5. Cuando haya un tercer juego, agregarlo a datos/proyectos.json (con 5 o más proyectos aparecen filtros y buscador).
+6. Se puede borrar desktop.ini (es de Windows, no del proyecto).

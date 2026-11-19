@@ -1,0 +1,4 @@
+[
+  {"nombre":"Golpea al Conejo Blanco","tipo":"juego","descripcion":"Hacé clic en los conejos blancos para ganar puntos. Si aparece el gato sonriente, hacele clic para obtener más tiempo.","autores":"Estudiantes de 4to año de Informática","tutores":"","enlace":"https://golpea-conejo-blanco.netlify.app/","imagen":"juego 1.PNG"},
+  {"nombre":"Carreras Locas","tipo":"juego","descripcion":"Movete con las teclas W, A, S, D. Tu objetivo es llegar primero a la meta.","autores":"Fernandez B. (4to año)","tutores":"","enlace":"https://carreras-locas.netlify.app/","imagen":"juego 2.png"}
+]

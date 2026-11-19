@@ -1,0 +1,12 @@
+[
+  {"nombre":"HTML","icono":"🌐","imagen":"html.png"},
+  {"nombre":"CSS","icono":"🎨","imagen":"css.png"},
+  {"nombre":"Python","icono":"🐍","imagen":"python.png"},
+  {"nombre":"JavaScript","icono":"⚡","imagen":"java.png"},
+  {"nombre":"Hardware","icono":"🔧","imagen":"hardware.png"},
+  {"nombre":"Redes","icono":"📡","imagen":"redes.png"},
+  {"nombre":"Bases de Datos","icono":"🗄️","imagen":"sql.png"},
+  {"nombre":"Resolución de Problemas","icono":"🧩","imagen":"problemas.png"},
+  {"nombre":"Seguridad Informática","icono":"🔒","imagen":"seguridad.png"},
+  {"nombre":"Sistema Operativo","icono":"💻","imagen":"sistema.png"}
+]
