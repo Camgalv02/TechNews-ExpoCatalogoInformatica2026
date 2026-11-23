@@ -112,54 +112,59 @@ if (videoMascota && matchMedia('(prefers-reduced-motion: reduce)').matches) {
   videoMascota.controls = true;
 }
 
-// ===== Carrusel "Así trabajamos" =====
+// ===== Carrusel "Así trabajamos" (fotos verticales) =====
 const carrusel = $('#carrusel');
 if (carrusel) {
   const pista = carrusel.querySelector('.c-pista');
   const puntos = carrusel.querySelector('.c-dots');
   const prev = carrusel.querySelector('.c-prev');
   const next = carrusel.querySelector('.c-next');
-  const vacio = $('.c-vacio');
 
   const fotos = () => [...pista.children];
-  const actual = () => Math.round(pista.scrollLeft / pista.clientWidth);
+  const paso = () => {                                   // cuánto mide avanzar una foto
+    const f = fotos();
+    return f.length > 1 ? f[1].offsetLeft - f[0].offsetLeft : pista.clientWidth;
+  };
+  const posiciones = () => Math.round((pista.scrollWidth - pista.clientWidth) / paso()) + 1;
+  const actual = () => Math.min(Math.round(pista.scrollLeft / paso()), posiciones() - 1);
   const ir = (i) => {
-    const n = fotos().length;
-    if (n) pista.scrollTo({ left: ((i + n) % n) * pista.clientWidth, behavior: 'smooth' });
+    const n = posiciones();
+    pista.scrollTo({ left: ((i + n) % n) * paso(), behavior: 'smooth' });
   };
   const marcar = () => [...puntos.children].forEach((p, i) => {
     p.classList.toggle('on', i === actual());
     p.setAttribute('aria-current', i === actual());
   });
-  const armar = () => {                          // (re)crea los puntitos según las fotos que existan
-    const n = fotos().length;
+  const armar = () => {                                  // los puntitos dependen de cuántas fotos entran en pantalla
+    const n = posiciones();
     puntos.innerHTML = '';
-    fotos().forEach((_, i) => {
+    for (let i = 0; i < n; i++) {
       const p = document.createElement('button');
       p.type = 'button';
-      p.setAttribute('aria-label', `Ir a la foto ${i + 1}`);
+      p.setAttribute('aria-label', `Ir a la posición ${i + 1}`);
       p.onclick = () => ir(i);
       puntos.appendChild(p);
-    });
+    }
     prev.hidden = next.hidden = puntos.hidden = n < 2;
-    carrusel.hidden = n === 0;
-    vacio.hidden = n > 0;
     marcar();
   };
-  const sacarSiFalla = (fig) => { fig.remove(); armar(); };   // una foto que no existe se saltea
 
-  fotos().forEach((fig) => fig.querySelector('img').addEventListener('error', () => sacarSiFalla(fig)));
-  addEventListener('load', () => fotos().forEach((fig) => {
+  // si la imagen todavía no existe, queda el cuadro de color con 📸
+  const sinFoto = (fig) => fig.classList.add('sin-foto');
+  fotos().forEach((fig) => {
     const im = fig.querySelector('img');
-    if (im.complete && !im.naturalWidth) sacarSiFalla(fig);
-  }));
+    im.addEventListener('error', () => sinFoto(fig));
+    if (im.complete && !im.naturalWidth) sinFoto(fig);
+  });
 
   pista.addEventListener('scroll', marcar, { passive: true });
+  addEventListener('resize', armar);
   prev.onclick = () => ir(actual() - 1);
   next.onclick = () => ir(actual() + 1);
   pista.addEventListener('keydown', (e) => {
     if (e.key === 'ArrowLeft') { e.preventDefault(); ir(actual() - 1); }
     if (e.key === 'ArrowRight') { e.preventDefault(); ir(actual() + 1); }
   });
+  addEventListener('load', armar);
   armar();
 }
